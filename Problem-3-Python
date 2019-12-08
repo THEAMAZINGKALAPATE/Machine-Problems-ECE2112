@@ -1,0 +1,16 @@
+import numpy as np
+points = input("Enter n amount of [x,y],[x,y] points: ")
+xy = eval(points) 
+n = np.array(xy)
+print 
+for i in range(len(n)):
+    poly = np.polyfit(n[:,0], n[:,1],i)
+    val = np.polyval(poly, n[:,0])
+    norm = np.linalg.norm(n[:,1] - val)
+    array = [i,norm]
+    if i == 0:
+        x = array
+    elif x[1] >= array[1]:
+        y = array[0]
+        poly = np.polyfit(n[:,0],n[:,1],y)  
+print('Coefficients: ',poly)
