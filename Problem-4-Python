@@ -1,0 +1,42 @@
+from math import sin
+from math import cos
+from math import sqrt
+import matplotlib.pyplot as plt
+import numpy as np
+import sys
+
+h = float(input('Initial Height: '))
+v = float(input('Enter Velocity(m/s): '))
+if v < 0:
+    print("Positive Inputs only for velocity")
+    sys.exit()
+a = float(input('Enter Elevation Angle: '))
+if a < 0:
+    print("Positive Inputs only for Angle")
+    sys.exit()
+xaccel = float(input('Enter x-axis acceleration: '))
+yaccel = float(input('Enter y-axis acceleration: '))
+if v < 0:
+    print("Positive Inputs only")
+    exit()
+g = 9.80665 #Acceleration due to gravity
+acc = sqrt(xaccel**2 + yaccel**2)
+vxi = v*cos(a)
+vyi = v*sin(a)
+A = (1/2)*-g
+B = vyi
+C = h
+k = B**2 - (4*A*C)
+t = (-B-k**(1/2))/(-g/2)
+T = np.arange(0,t,0.1,dtype='float')
+for i in T:
+    if i < t/2:
+        x = (xaccel/2)*T**2 + vxi*T
+        y= -4.9*T**2 + vyi*T + h
+        plot1 = plt.plot(x,y,color='g')
+        plot1.set_ylim([0,max(y)])
+    elif i >= t/2:
+        x = (xaccel/2)*T**2 + vxi*T
+        y= -4.9*T**2 + vyi*T + h
+        plot2 = plt.plot(x,y,color='g')
+        plot2.set_ylim([0,max(y)])
